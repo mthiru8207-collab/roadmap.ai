@@ -19,6 +19,7 @@ import { POPULAR_ROLES } from '../data/rolePresets';
 import { useLearning } from '../context/LearningContext';
 import { useAuth } from '../context/AuthContext';
 import { ThemeToggle } from '../components/common/ThemeToggle';
+import { HeroTrajectoryVisualizer } from '../components/landing/HeroTrajectoryVisualizer';
 
 interface LandingPageProps {
   onOpenAuth?: () => void;
@@ -146,85 +147,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth }) => {
             </div>
           </div>
 
-          {/* Right Column: Custom Route-Based Illustration */}
+          {/* Right Column: Interactive Trajectory Atlas Visualizer */}
           <div className="lg:col-span-5">
-            <div className="relative p-6 sm:p-8 rounded bg-white dark:bg-dark-card border border-stone dark:border-dark-border shadow-atlas overflow-hidden">
-              {/* Technical field note markings */}
-              <div className="flex items-center justify-between text-[10px] font-mono text-graphite dark:text-dark-muted border-b border-stone-light dark:border-dark-border pb-3 mb-6">
-                <span>PLATE 01 // TRAJECTORY ATLAS</span>
-                <span>COORD: 37°46'N 122°25'W</span>
-              </div>
-
-              {/* The SVG Route Canvas */}
-              <div className="relative py-4">
-                <svg
-                  viewBox="0 0 380 320"
-                  className="w-full h-auto"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Subtle Grid Lines */}
-                  <line x1="20" y1="40" x2="360" y2="40" stroke="currentColor" className="text-stone dark:text-dark-border" strokeDasharray="3 3" />
-                  <line x1="20" y1="120" x2="360" y2="120" stroke="currentColor" className="text-stone dark:text-dark-border" strokeDasharray="3 3" />
-                  <line x1="20" y1="200" x2="360" y2="200" stroke="currentColor" className="text-stone dark:text-dark-border" strokeDasharray="3 3" />
-                  <line x1="20" y1="280" x2="360" y2="280" stroke="currentColor" className="text-stone dark:text-dark-border" strokeDasharray="3 3" />
-
-                  {/* Connecting Route Line (Thin, Art-directed Path) */}
-                  <path
-                    d="M 60 260 C 110 260, 110 180, 160 180 C 210 180, 210 100, 260 100 C 290 100, 300 50, 320 50"
-                    stroke="currentColor"
-                    className="text-ink dark:text-dark-ink"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-
-                  {/* Milestone 01: Learn */}
-                  <g>
-                    <circle cx="60" cy="260" r="14" className="fill-white dark:fill-dark-card" stroke="#879584" strokeWidth="1.5" />
-                    <circle cx="60" cy="260" r="5" fill="#879584" />
-                    <text x="60" y="295" textAnchor="middle" className="fill-ink dark:fill-dark-ink" fontSize="11" fontFamily="Plus Jakarta Sans" fontWeight="600">01 Learn</text>
-                    <text x="60" y="308" textAnchor="middle" className="fill-graphite dark:fill-dark-muted" fontSize="9" fontFamily="JetBrains Mono">DAY 01–07</text>
-                  </g>
-
-                  {/* Milestone 02: Practice */}
-                  <g>
-                    <circle cx="160" cy="180" r="14" className="fill-white dark:fill-dark-card" stroke="#879584" strokeWidth="1.5" />
-                    <circle cx="160" cy="180" r="5" fill="#879584" />
-                    <text x="160" y="215" textAnchor="middle" className="fill-ink dark:fill-dark-ink" fontSize="11" fontFamily="Plus Jakarta Sans" fontWeight="600">02 Practice</text>
-                    <text x="160" y="228" textAnchor="middle" className="fill-graphite dark:fill-dark-muted" fontSize="9" fontFamily="JetBrains Mono">DAY 08–14</text>
-                  </g>
-
-                  {/* Milestone 03: Build */}
-                  <g>
-                    <circle cx="260" cy="100" r="14" className="fill-white dark:fill-dark-card text-ink dark:text-dark-ink" stroke="currentColor" strokeWidth="1.5" />
-                    <circle cx="260" cy="100" r="5" fill="currentColor" className="text-ink dark:text-dark-ink" />
-                    <text x="260" y="135" textAnchor="middle" className="fill-ink dark:fill-dark-ink" fontSize="11" fontFamily="Plus Jakarta Sans" fontWeight="600">03 Build</text>
-                    <text x="260" y="148" textAnchor="middle" className="fill-graphite dark:fill-dark-muted" fontSize="9" fontFamily="JetBrains Mono">DAY 15–21</text>
-                  </g>
-
-                  {/* Milestone 04: Become (Vermilion Destination Pin) */}
-                  <g>
-                    {/* Pulsing ring */}
-                    <circle cx="320" cy="50" r="18" fill="#F04B35" fillOpacity="0.15" stroke="#F04B35" strokeWidth="1" strokeDasharray="2 2" />
-                    <circle cx="320" cy="50" r="12" fill="#F04B35" />
-                    <circle cx="320" cy="50" r="4" fill="#FFFFFF" />
-                    <text x="320" y="28" textAnchor="middle" fill="#F04B35" fontSize="11" fontFamily="Plus Jakarta Sans" fontWeight="700">04 Become</text>
-                    <text x="320" y="80" textAnchor="middle" className="fill-ink dark:fill-dark-ink" fontSize="9" fontFamily="JetBrains Mono" fontWeight="600">JOB READY</text>
-                  </g>
-
-                  {/* Small Technical Annotations */}
-                  <text x="115" y="225" className="fill-graphite dark:fill-dark-muted" fontSize="8" fontFamily="JetBrains Mono">+3.5 HRS/WK</text>
-                  <text x="215" y="145" className="fill-graphite dark:fill-dark-muted" fontSize="8" fontFamily="JetBrains Mono">70% CHECK</text>
-                  <text x="275" y="75" fill="#F04B35" fontSize="8" fontFamily="JetBrains Mono">DESTINATION</text>
-                </svg>
-              </div>
-
-              {/* Technical Caption Strip */}
-              <div className="mt-4 pt-3 border-t border-stone-light dark:border-dark-border flex items-center justify-between text-[11px] font-mono text-graphite-dark dark:text-dark-muted">
-                <span>SYNTHESIS: DYNAMIC ORDERING</span>
-                <span className="text-vermilion font-semibold">4 STAGES &bull; 28 DAYS</span>
-              </div>
-            </div>
+            <HeroTrajectoryVisualizer />
           </div>
         </div>
       </section>
