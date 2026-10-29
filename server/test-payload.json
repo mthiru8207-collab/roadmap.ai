@@ -1,0 +1,11 @@
+{
+  "model": "meta/llama-3.2-11b-vision-instruct",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi"
+    }
+  ],
+  "max_tokens": 10
+}
+

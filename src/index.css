@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-paper: #F7F6F2;
+    --text-ink: #20211F;
+    --text-graphite: #777872;
+    --border-stone: #E7E5DE;
+    --accent-vermilion: #F04B35;
+    --accent-sage: #879584;
+  }
+
+  html.dark {
+    --bg-paper: #0E1012;
+    --text-ink: #F0F2F5;
+    --text-graphite: #8A929E;
+    --border-stone: #282D36;
+    --accent-vermilion: #F04B35;
+    --accent-sage: #879584;
+    background-color: #0E1012;
+    color: #F0F2F5;
+  }
+
+  html {
+    background-color: #F7F6F2;
+    color: #20211F;
+    scroll-behavior: smooth;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  body {
+    background-color: #F7F6F2;
+    color: #20211F;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.011em;
+  }
+
+  html.dark body {
+    background-color: #0E1012;
+    color: #F0F2F5;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Custom sleek scrollbar for paper editorial & pure obsidian dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F6F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E0DDD5;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CFCBC2;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0E1012;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #282D36;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3B4250;
+}
+
+/* Editorial rule / line styles */
+.editorial-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(231, 229, 222, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(231, 229, 222, 0.4) 1px, transparent 1px);
+}
+
+.dark .editorial-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.subtle-border {
+  border-color: #E7E5DE;
+}
+
+.paper-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E5DE;
+}
+
+.dark .paper-card {
+  background-color: #16181C;
+  border-color: #282D36;
+}
+
+.paper-tint {
+  background-color: #F2EFE9;
+}
+
+.dark .paper-tint {
+  background-color: #1C1F25;
+}
+
+/* Global dark mode color mappings: Pure cool obsidian & charcoal (NO brown/beige warmth) */
+.dark nav,
+.dark header {
+  background-color: #0E1012 !important;
+  border-color: #282D36 !important;
+}
+
+.dark .bg-paper {
+  background-color: #0E1012 !important;
+}
+
+.dark .bg-paper\/90,
+.dark .bg-paper\/95,
+.dark .bg-paper\/80 {
+  background-color: #0E1012 !important;
+}
+
+.dark .bg-white {
+  background-color: #16181C !important;
+}
+
+.dark .bg-white\/90,
+.dark .bg-white\/80 {
+  background-color: rgba(22, 24, 28, 0.9) !important;
+}
+
+.dark .bg-paper-card {
+  background-color: #16181C !important;
+}
+
+.dark .bg-paper-subtle,
+.dark [class*="bg-paper-subtle"] {
+  background-color: #181B20 !important;
+}
+
+.dark .bg-paper-tint,
+.dark [class*="bg-paper-tint"] {
+  background-color: #1A1D23 !important;
+}
+
+.dark .bg-stone-light {
+  background-color: #1E222A !important;
+}
+
+.dark .bg-stone {
+  background-color: #242932 !important;
+}
+
+.dark .text-ink {
+  color: #F0F2F5 !important;
+}
+
+.dark .text-ink-soft {
+  color: #D4D8E0 !important;
+}
+
+.dark .text-ink-light {
+  color: #B0B6C0 !important;
+}
+
+.dark .text-graphite {
+  color: #8A929E !important;
+}
+
+.dark .text-graphite-dark {
+  color: #A0A8B4 !important;
+}
+
+.dark .text-graphite-light {
+  color: #656C78 !important;
+}
+
+.dark .border-stone,
+.dark .border-stone-line {
+  border-color: #282D36 !important;
+}
+
+.dark .border-stone-light {
+  border-color: #20242B !important;
+}
+
+.dark .hover\:bg-paper-subtle:hover,
+.dark .hover\:bg-paper-tint:hover,
+.dark .hover\:bg-stone-light:hover {
+  background-color: #222630 !important;
+}
+
+.dark .shadow-subtle {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .shadow-atlas {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+}

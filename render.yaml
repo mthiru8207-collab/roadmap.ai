@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: roadmap-ai-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server/index.mjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NVIDIA_API_KEY
+        sync: false
+      - key: NVIDIA_MODEL
+        value: meta/llama-3.2-11b-vision-instruct
+
