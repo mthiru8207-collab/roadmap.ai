@@ -1,8 +1,10 @@
 services:
+  # All-in-One Full-Stack Service: Serves React Frontend (SPA) + Express Node API
   - type: web
-    name: roadmap-ai-api
+    name: roadmap-ai
     runtime: node
-    buildCommand: npm install
+    plan: free
+    buildCommand: npm install && npm run build
     startCommand: node server/index.mjs
     envVars:
       - key: NODE_ENV
@@ -11,4 +13,7 @@ services:
         sync: false
       - key: NVIDIA_MODEL
         value: meta/llama-3.2-11b-vision-instruct
-
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false

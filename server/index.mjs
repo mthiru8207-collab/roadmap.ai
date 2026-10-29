@@ -107,6 +107,43 @@ async function callNvidiaChat(messages, options = {}) {
   }
 }
 
+const MIME_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.mjs': 'application/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+  '.webp': 'image/webp',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.ttf': 'font/ttf',
+  '.txt': 'text/plain; charset=utf-8',
+};
+
+function serveStaticFile(res, filePath) {
+  try {
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      const ext = path.extname(filePath).toLowerCase();
+      const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=31536000, immutable',
+      });
+      fs.createReadStream(filePath).pipe(res);
+      return true;
+    }
+  } catch (err) {
+    console.warn('[Static] Error serving static file:', err.message);
+  }
+  return false;
+}
+
 const server = http.createServer(async (req, res) => {
   // CORS Preflight
   if (req.method === 'OPTIONS') {
@@ -419,6 +456,24 @@ Return ONLY a valid JSON object matching this schema:
       return sendJson(res, 200, { useFallback: true });
     } catch (err) {
       return sendJson(res, 500, { error: err.message, useFallback: true });
+    }
+  }
+
+  // 5. Static SPA Frontend Serving (when dist/ is present in production)
+  const distDir = path.resolve(__dirname, '../dist');
+  if (fs.existsSync(distDir) && req.method === 'GET' && !pathname.startsWith('/api')) {
+    const cleanPath = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
+    const requestedFile = path.join(distDir, cleanPath);
+
+    // If exact asset file exists (e.g. /assets/index-xxx.js, /favicon.svg)
+    if (fs.existsSync(requestedFile) && fs.statSync(requestedFile).isFile()) {
+      return serveStaticFile(res, requestedFile);
+    }
+
+    // SPA client-side routing fallback (for /roadmap, /lesson/1, /dashboard, etc.)
+    const indexHtml = path.join(distDir, 'index.html');
+    if (fs.existsSync(indexHtml)) {
+      return serveStaticFile(res, indexHtml);
     }
   }
 
